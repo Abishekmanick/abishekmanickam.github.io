@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abishek Manickam — Supply Chain & Logistics Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue:#0047FF;
+      --blue-light:#e8eeff;
+      --black:#0a0a0a;
+      --gray:#f5f5f3;
+      --border:#e2e2df;
+      --muted:#6b6b6b;
+      --text:#1a1a1a;
+      --white:#ffffff;
+      --radius:6px;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{background:var(--white);color:var(--text);font-family:'Figtree',sans-serif;font-weight:400;line-height:1.65;overflow-x:hidden}
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:var(--gray)}
+    ::-webkit-scrollbar-thumb{background:var(--blue)}
+
+    /* ── SELECTION ── */
+    ::selection{background:var(--blue);color:#fff}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.9rem 2.5rem;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:'Barlow Condensed',sans-serif;font-weight:900;
+      font-size:1.35rem;letter-spacing:.06em;color:var(--black);
+      text-decoration:none;
+    }
+    .nav-logo span{color:var(--blue)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{
+      text-decoration:none;color:var(--muted);font-size:.78rem;
+      font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+      transition:color .2s;
+    }
+    .nav-links a:hover{color:var(--blue)}
+    .nav-hire{
+      background:var(--blue);color:#fff;font-family:'Figtree',sans-serif;
+      font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+      padding:.5rem 1.2rem;border-radius:var(--radius);text-decoration:none;
+      transition:opacity .2s,transform .15s;
+    }
+    .nav-hire:hover{opacity:.88;transform:translateY(-1px)}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-hamburger span{width:22px;height:2px;background:var(--black);border-radius:2px;transition:.3s}
+    @media(max-width:760px){
+      .nav-links,.nav-hire{display:none}
+      .nav-hamburger{display:flex}
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu{
+      display:none;position:fixed;inset:0;z-index:190;
+      background:#fff;flex-direction:column;align-items:center;justify-content:center;
+      gap:2rem;
+    }
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2rem;
+      color:var(--black);text-decoration:none;letter-spacing:.05em;text-transform:uppercase;
+      transition:color .2s;
+    }
+    .mobile-menu a:hover{color:var(--blue)}
+    .mobile-close{position:absolute;top:1.2rem;right:2rem;font-size:1.8rem;cursor:pointer;color:var(--muted);background:none;border:none}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;padding:10rem 2.5rem 5rem;
+      max-width:1100px;margin:0 auto;
+      display:flex;flex-direction:column;justify-content:center;
+    }
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--text);border:1px solid var(--border);
+      padding:.4rem 1.1rem;border-radius:2px;margin-bottom:2.2rem;
+      animation:fadeUp .5s ease both;
+    }
+    .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+    .hero-name{
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:900;font-size:clamp(4.5rem,12vw,9.5rem);
+      line-height:.92;letter-spacing:-.01em;color:var(--black);
+      animation:fadeUp .5s .1s ease both;
+    }
+    .hero-name .accent{color:var(--blue)}
+    .hero-name .dot{color:var(--blue)}
+
+    .hero-title{
+      font-size:clamp(1rem,2vw,1.2rem);font-weight:400;color:var(--muted);
+      margin-top:1.4rem;
+      animation:fadeUp .5s .2s ease both;
+    }
+    .hero-title strong{color:var(--text);font-weight:600}
+
+    .hero-summary{
+      max-width:640px;margin-top:1.4rem;font-size:.97rem;color:var(--muted);
+      line-height:1.75;
+      animation:fadeUp .5s .28s ease both;
+    }
+
+    .hero-meta{
+      display:flex;flex-wrap:wrap;gap:1.4rem;margin-top:1.4rem;
+      font-size:.82rem;color:var(--muted);
+      animation:fadeUp .5s .34s ease both;
+    }
+    .hero-meta span{display:flex;align-items:center;gap:.4rem}
+    .hero-meta .lbl{color:var(--blue);font-weight:600}
+
+    .hero-cta{
+      display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.4rem;
+      animation:fadeUp .5s .4s ease both;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-family:'Figtree',sans-serif;font-size:.8rem;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+      padding:.72rem 1.6rem;border-radius:var(--radius);
+      transition:all .2s;cursor:pointer;border:none;
+    }
+    .btn-blue{background:var(--blue);color:#fff}
+    .btn-blue:hover{background:#0035cc;transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black)}
+    .btn-outline:hover{background:var(--black);color:#fff}
+    .btn-ghost{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+    .btn-ghost:hover{background:var(--blue-light)}
+
+    .hero-email{
+      margin-top:1.2rem;font-size:.85rem;color:var(--muted);
+      display:flex;align-items:center;gap:.5rem;
+      animation:fadeUp .5s .46s ease both;
+    }
+    .hero-email a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:color .2s,border-color .2s}
+    .hero-email a:hover{color:var(--blue);border-color:var(--blue)}
+
+    .hero-stats{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      gap:1.5rem;margin-top:3.5rem;padding-top:3rem;
+      border-top:1px solid var(--border);
+      animation:fadeUp .5s .52s ease both;
+    }
+    @media(max-width:680px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+    .stat{border-left:3px solid var(--blue);padding-left:1rem}
+    .stat-num{
+      font-family:'Barlow Condensed',sans-serif;font-weight:900;
+      font-size:2.8rem;color:var(--blue);line-height:1;
+    }
+    .stat-label{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+
+    /* ── SHARED SECTION STYLES ── */
+    section{padding:5.5rem 2.5rem}
+    .container{max-width:1100px;margin:0 auto}
+    .section-tag{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.8rem}
+    .section-title{
+      font-family:'Barlow Condensed',sans-serif;font-weight:900;
+      font-size:clamp(2.4rem,5vw,4rem);line-height:.95;letter-spacing:-.01em;color:var(--black);
+    }
+    .section-title .dot{color:var(--blue)}
+    .section-desc{color:var(--muted);font-size:.97rem;max-width:540px;margin-top:.9rem;line-height:1.75}
+    .section-header{margin-bottom:3.5rem}
+
+    /* ── ROLES STRIP ── */
+    #roles{background:var(--black);padding:3.5rem 2.5rem}
+    .roles-inner{max-width:1100px;margin:0 auto}
+    .roles-label{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.2rem}
+    .roles-tags{display:flex;flex-wrap:wrap;gap:.7rem}
+    .role-tag{
+      font-size:.82rem;font-weight:500;color:#fff;
+      border:1px solid rgba(255,255,255,.25);
+      padding:.42rem 1rem;border-radius:var(--radius);
+      transition:background .2s,border-color .2s;
+    }
+    .role-tag:hover{background:var(--blue);border-color:var(--blue)}
+
+    /* ── ATS KEYWORDS MARQUEE ── */
+    #ats{background:var(--gray);padding:1.8rem 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .ats-label{font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);padding:0 2.5rem;margin-bottom:.8rem}
+    .marquee-wrap{overflow:hidden;position:relative}
+    .marquee-track{display:flex;gap:2rem;width:max-content;animation:marquee 28s linear infinite}
+    .marquee-track:hover{animation-play-state:paused}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .kw{font-size:.8rem;font-weight:500;color:var(--muted);white-space:nowrap;padding:.3rem .8rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+
+    /* ── EXPERTISE ── */
+    #expertise{background:var(--white)}
+    .expertise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+    .exp-card{
+      border:1px solid var(--border);border-radius:10px;padding:2rem;
+      transition:border-color .2s,transform .2s;
+    }
+    .exp-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+    .exp-card-icon{
+      width:40px;height:40px;background:var(--blue-light);
+      border-radius:8px;display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;margin-bottom:1.2rem;
+    }
+    .exp-card-title{font-size:1.05rem;font-weight:600;color:var(--black);margin-bottom:1rem}
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+    .tag{
+      font-size:.77rem;font-weight:500;color:var(--text);
+      border:1px solid var(--border);padding:.28rem .75rem;border-radius:4px;
+      transition:border-color .2s,color .2s;
+    }
+    .tag:hover{border-color:var(--blue);color:var(--blue)}
+    .tag.hl{background:var(--blue-light);border-color:#b3c6ff;color:var(--blue)}
+
+    /* ── EXPERIENCE ── */
+    #experience{background:var(--gray)}
+    .timeline{border-left:2px solid var(--border);padding-left:2.5rem;margin-left:1rem}
+    .tl-item{position:relative;margin-bottom:3.2rem}
+    .tl-item::before{
+      content:'';position:absolute;left:-3.15rem;top:.5rem;
+      width:10px;height:10px;border-radius:50%;
+      background:var(--blue);border:2.5px solid var(--white);
+      box-shadow:0 0 0 2px var(--blue);
+    }
+    .tl-date{font-size:.73rem;font-weight:700;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.3rem}
+    .tl-role{font-size:1.1rem;font-weight:600;color:var(--black);margin-bottom:.15rem}
+    .tl-company{font-size:.88rem;color:var(--muted);margin-bottom:.9rem}
+    .tl-points{list-style:none}
+    .tl-points li{
+      font-size:.9rem;color:var(--muted);
+      padding:.28rem 0 .28rem 1.3rem;position:relative;line-height:1.65;
+    }
+    .tl-points li::before{
+      content:'';position:absolute;left:0;top:.68rem;
+      width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:.5;
+    }
+    .verified-pill{
+      display:inline-flex;align-items:center;gap:.45rem;margin-top:.8rem;
+      font-size:.72rem;font-weight:600;color:#16a34a;
+      background:#f0fdf4;border:1px solid #bbf7d0;
+      padding:.3rem .85rem;border-radius:20px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects{background:var(--white)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+    .proj-card{
+      border:1px solid var(--border);border-radius:10px;overflow:hidden;
+      transition:border-color .2s,transform .2s;
+    }
+    .proj-card:hover{border-color:var(--blue);transform:translateY(-4px)}
+    .proj-card.featured{
+      grid-column:1/-1;
+      border-color:#b3c6ff;
+      background:linear-gradient(135deg,var(--white) 60%,var(--blue-light));
+    }
+    .proj-body{padding:2rem}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+    .proj-tag{
+      font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--blue);background:var(--blue-light);
+      padding:.25rem .7rem;border-radius:4px;
+    }
+    .proj-tag.dark{background:var(--black);color:#fff}
+    .proj-title{font-size:1.05rem;font-weight:600;color:var(--black);margin-bottom:.35rem}
+    .proj-client{font-size:.8rem;color:var(--muted);margin-bottom:.85rem;font-style:italic}
+    .proj-desc{font-size:.88rem;color:var(--muted);line-height:1.75}
+    .proj-results{
+      margin-top:1.4rem;padding-top:1.2rem;
+      border-top:1px solid var(--border);
+      display:grid;grid-template-columns:1fr 1fr;gap:.6rem;
+    }
+    .proj-results.single{grid-template-columns:1fr}
+    .result-item{
+      font-size:.82rem;font-weight:500;color:var(--text);
+      display:flex;align-items:flex-start;gap:.5rem;
+    }
+    .result-item::before{content:'↗';color:var(--blue);flex-shrink:0;font-weight:700}
+
+    /* ── EDUCATION ── */
+    #education{background:var(--gray)}
+    .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+    .edu-card{
+      background:var(--white);border:1px solid var(--border);
+      border-radius:10px;padding:1.8rem 2rem;
+      transition:border-color .2s;
+    }
+    .edu-card:hover{border-color:var(--blue)}
+    .edu-icon{font-size:1.5rem;margin-bottom:.9rem}
+    .edu-degree{font-size:1rem;font-weight:600;color:var(--black);margin-bottom:.3rem}
+    .edu-school{font-size:.88rem;color:var(--muted)}
+    .edu-date{font-size:.73rem;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-top:.4rem}
+
+    /* ── SKILLS ── */
+    #skills{background:var(--white)}
+    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+    @media(max-width:680px){.skills-grid{grid-template-columns:1fr}}
+    .skill-cat{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+    .skill-bar{margin-bottom:1rem}
+    .skill-row{display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem}
+    .skill-row span{color:var(--muted);font-size:.8rem}
+    .skill-track{height:3px;background:var(--border);border-radius:2px}
+    .skill-fill{height:100%;border-radius:2px;background:var(--blue)}
+    .highlights-list{display:flex;flex-direction:column;gap:.7rem}
+    .hl-item{
+      background:var(--gray);border-left:3px solid var(--blue);
+      padding:.9rem 1rem;border-radius:0 var(--radius) var(--radius) 0;
+      font-size:.85rem;font-weight:500;color:var(--text);
+    }
+
+    /* ── CONTACT ── */
+    #contact{background:var(--black);color:#fff}
+    #contact .section-tag{color:#7b93ff}
+    #contact .section-title{color:#fff}
+    #contact .section-desc{color:rgba(255,255,255,.55)}
+    .contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem}
+    @media(max-width:780px){.contact-layout{grid-template-columns:1fr}}
+    .contact-info p{font-size:.95rem;color:rgba(255,255,255,.55);margin-bottom:2rem;line-height:1.75}
+    .contact-links{display:flex;flex-direction:column;gap:.85rem}
+    .contact-link{
+      display:flex;align-items:center;gap:1rem;
+      padding:.9rem 1.1rem;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+      border-radius:var(--radius);text-decoration:none;color:#fff;
+      font-size:.88rem;transition:background .2s,border-color .2s;
+    }
+    .contact-link:hover{background:rgba(0,71,255,.2);border-color:var(--blue)}
+    .contact-link-icon{width:32px;height:32px;border-radius:6px;background:rgba(0,71,255,.3);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+
+    /* ── FORM ── */
+    .contact-form{display:flex;flex-direction:column;gap:1rem}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:520px){.form-row{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:.4rem}
+    .field label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+    .field input,.field textarea,.field select{
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+      color:#fff;font-family:'Figtree',sans-serif;font-size:.9rem;
+      padding:.75rem 1rem;border-radius:var(--radius);outline:none;
+      transition:border-color .2s,background .2s;resize:vertical;
+    }
+    .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.28)}
+    .field input:focus,.field textarea:focus{border-color:var(--blue);background:rgba(0,71,255,.08)}
+    .field textarea{min-height:110px}
+    .form-submit{
+      background:var(--blue);color:#fff;font-family:'Figtree',sans-serif;
+      font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      padding:.85rem 2rem;border-radius:var(--radius);border:none;cursor:pointer;
+      transition:background .2s,transform .15s;
+      display:flex;align-items:center;gap:.6rem;
+      align-self:flex-start;
+    }
+    .form-submit:hover{background:#0035cc;transform:translateY(-2px)}
+    .form-submit svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+    #form-success{
+      display:none;margin-top:.8rem;font-size:.85rem;font-weight:500;
+      color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);
+      padding:.75rem 1rem;border-radius:var(--radius);
+    }
+    #form-error{
+      display:none;margin-top:.8rem;font-size:.85rem;font-weight:500;
+      color:#f87171;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);
+      padding:.75rem 1rem;border-radius:var(--radius);
+    }
+
+    /* ── FOOTER ── */
+    footer{
+      background:#050505;border-top:1px solid rgba(255,255,255,.06);
+      padding:2.5rem 2.5rem;
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+    }
+    .footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:.06em;color:#fff}
+    .footer-logo span{color:var(--blue)}
+    .footer-links{display:flex;gap:1.8rem;flex-wrap:wrap}
+    .footer-links a{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:var(--blue)}
+    .footer-copy{font-size:.75rem;color:rgba(255,255,255,.25)}
+
+    /* ── BACK TO TOP ── */
+    #btt{
+      position:fixed;bottom:2rem;right:2rem;z-index:100;
+      width:40px;height:40px;background:var(--blue);color:#fff;
+      border:none;border-radius:50%;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;opacity:0;transition:opacity .3s,transform .2s;
+      pointer-events:none;
+    }
+    #btt.visible{opacity:1;pointer-events:all}
+    #btt:hover{transform:translateY(-3px)}
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-d1{transition-delay:.1s}
+    .reveal-d2{transition-delay:.2s}
+    .reveal-d3{transition-delay:.3s}
+
+    /* ── DIVIDER ── */
+    .divider{width:100%;height:1px;background:var(--border);margin:1.5rem 0}
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">✕</button>
+  <a href="#expertise" onclick="closeMenu()">Expertise</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">ABISHEK<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-hire" href="#contact">Hire Me</a>
+  <button class="nav-hamburger" onclick="openMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge"><span class="badge-dot"></span> Open to Opportunities · EU Based · Remote / Hybrid / On-site</div>
+  <h1 class="hero-name">ABISHEK<br><span class="accent">MANICKAM<span class="dot">.</span></span></h1>
+  <p class="hero-title"><strong>Supply Chain &amp; Logistics Specialist</strong> · Transportation Engineering Professional · MSc · EU-Based</p>
+  <p class="hero-summary">Supply Chain &amp; Logistics Specialist with 5+ years delivering 80% budget efficiency gains, 40% production output increases, and 12% transport cost savings across manufacturing and logistics. MSc from Warsaw University of Technology. Skilled in SAP, OMP, Power BI, and Python — competencies in active demand across logistics hubs in Germany, the Netherlands, Belgium, and the Nordics.</p>
+  <div class="hero-meta">
+    <span>📍 <span class="lbl">Warsaw, Poland</span></span>
+    <span>🌍 <span class="lbl">EU citizen-eligible · Open to relocation</span></span>
+    <span>🎯 Targets: <span class="lbl">Germany · Netherlands · Belgium · Nordics · Poland</span></span>
+  </div>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-blue">Hire Me</a>
+    <a href="Abishek_Manickam_Mecahnical_LogisticsEngineering.pdf" class="btn btn-outline" download="Abishek_Manickam_Mecahnical_LogisticsEngineering.pdf">↓ Download CV</a>
+    <a href="https://linkedin.com/in/abishekmanickam" target="_blank" class="btn btn-ghost">LinkedIn →</a>
+  </div>
+  <div class="hero-email">✉ <a href="mailto:abishekmanickam.official@gmail.com">abishekmanickam.official@gmail.com</a></div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat"><div class="stat-num">80%</div><div class="stat-label">Budget Efficiency Gain</div></div>
+    <div class="stat"><div class="stat-num">40%</div><div class="stat-label">Production Output Boost</div></div>
+    <div class="stat"><div class="stat-num">18%</div><div class="stat-label">Freight Cost Reduction</div></div>
+  </div>
+</section>
+
+<!-- TARGET ROLES -->
+<div id="roles">
+  <div class="roles-inner">
+    <div class="roles-label">Target Roles</div>
+    <div class="roles-tags">
+      <span class="role-tag">Logistics Engineer</span>
+      <span class="role-tag">Supply Chain Analyst</span>
+      <span class="role-tag">Demand Planner</span>
+      <span class="role-tag">S&amp;OP Analyst</span>
+      <span class="role-tag">Procurement Specialist</span>
+      <span class="role-tag">Transportation Manager</span>
+      <span class="role-tag">SAP IBP Consultant</span>
+      <span class="role-tag">Operations Manager</span>
+    </div>
+  </div>
+</div>
+
+<!-- ATS KEYWORDS -->
+<div id="ats">
+  <div class="ats-label">ATS Keywords · Recruiter Index</div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="kw">Netherlands</span><span class="kw">Belgium</span><span class="kw">Nordics</span><span class="kw">Supply Chain Management</span><span class="kw">Logistics Engineer</span><span class="kw">Supply Chain Analyst</span><span class="kw">Demand Planner</span><span class="kw">SAP IBP</span><span class="kw">OMP Planning</span><span class="kw">S&amp;OP</span><span class="kw">Power BI</span><span class="kw">Python</span><span class="kw">Inventory Management</span><span class="kw">Warehouse Operations</span><span class="kw">Freight Management</span><span class="kw">Transportation Engineering</span><span class="kw">ERP Implementation</span><span class="kw">Process Improvement</span><span class="kw">Lean Six Sigma</span><span class="kw">EU Blue Card</span><span class="kw">MSc Transportation</span>
+      <span class="kw">Netherlands</span><span class="kw">Belgium</span><span class="kw">Nordics</span><span class="kw">Supply Chain Management</span><span class="kw">Logistics Engineer</span><span class="kw">Supply Chain Analyst</span><span class="kw">Demand Planner</span><span class="kw">SAP IBP</span><span class="kw">OMP Planning</span><span class="kw">S&amp;OP</span><span class="kw">Power BI</span><span class="kw">Python</span><span class="kw">Inventory Management</span><span class="kw">Warehouse Operations</span><span class="kw">Freight Management</span><span class="kw">Transportation Engineering</span><span class="kw">ERP Implementation</span><span class="kw">Process Improvement</span><span class="kw">Lean Six Sigma</span><span class="kw">EU Blue Card</span><span class="kw">MSc Transportation</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">What I Bring</div>
+      <h2 class="section-title">Areas of<br>Expertise<span class="dot">.</span></h2>
+      <p class="section-desc">Five years in supply-chain, transportation engineering and ERP-driven operations — translated into measurable outcomes across freight, inventory, and procurement.</p>
+    </div>
+    <div class="expertise-grid">
+      <div class="exp-card reveal">
+        <div class="exp-card-icon">🚚</div>
+        <div class="exp-card-title">Core Logistics</div>
+        <div class="tag-cloud">
+          <span class="tag hl">Supply Chain Management</span>
+          <span class="tag hl">Inventory &amp; DRP Management</span>
+          <span class="tag hl">Warehouse Operations</span>
+          <span class="tag">OOG Transport</span>
+          <span class="tag">Multimodal Transportation</span>
+          <span class="tag">Returns Management</span>
+        </div>
+      </div>
+      <div class="exp-card reveal reveal-d1">
+        <div class="exp-card-icon">📊</div>
+        <div class="exp-card-title">Planning &amp; Optimisation</div>
+        <div class="tag-cloud">
+          <span class="tag hl">Demand Planning</span>
+          <span class="tag hl">S&amp;OP</span>
+          <span class="tag hl">Replenishment Flow Management</span>
+          <span class="tag hl">OMP Planning</span>
+          <span class="tag">MES Optimisation</span>
+          <span class="tag">Process Improvement</span>
+          <span class="tag">Lean / Six Sigma</span>
+          <span class="tag">Technical Audit Management</span>
+        </div>
+      </div>
+      <div class="exp-card reveal reveal-d2">
+        <div class="exp-card-icon">⚙️</div>
+        <div class="exp-card-title">Data &amp; Systems</div>
+        <div class="tag-cloud">
+          <span class="tag hl">SAP</span>
+          <span class="tag hl">Power BI</span>
+          <span class="tag hl">Python</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Microsoft Azure</span>
+          <span class="tag">R Programming</span>
+          <span class="tag">Oracle ERP</span>
+          <span class="tag">MS Dynamics</span>
+          <span class="tag">AutoCAD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Work History</div>
+      <h2 class="section-title">Professional<br>Experience<span class="dot">.</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-date">Jan 2024 — Mar 2025</div>
+        <div class="tl-role">Freelance Supply Chain Consultant</div>
+        <div class="tl-company">Paula's Fruits and Foods Exports S.A. de C.V. · Mexico City (Remote) · Fresh Produce &amp; EU Export</div>
+        <ul class="tl-points">
+          <li>Reduced excess inventory by 25% — audited full SKU flow from harvest to freight handoff, redesigned reorder cycles aligned to seasonal EU demand with FIFO protocols and shelf-life tracking</li>
+          <li>Improved on-time delivery from 79% to 96% — the highest OTD rate in company history — by restructuring freight routing across three Mexico-to-EU corridors</li>
+          <li>Cut freight &amp; logistics expenditure by 18% through carrier SLA renegotiation and route consolidation to Spain, Germany, and the Netherlands</li>
+          <li>Authored 10+ SOPs covering customs coordination, cold-chain compliance, EU phytosanitary documentation, and carrier handoff protocols</li>
+        </ul>
+        <div class="verified-pill">✓ Verified · Letter of Achievement · Ref: PFFE/LOA/SCM/2025-017 · March 2025</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Jan 2023 — Oct 2023</div>
+        <div class="tl-role">Junior Networking Intern</div>
+        <div class="tl-company">JNS Sp. z o.o. · Lodz, Poland</div>
+        <ul class="tl-points">
+          <li>Reduced network downtime by 27% and improved system performance by 30% via server upgrades, VoIP maintenance, and network protocol optimisation</li>
+          <li>Developed custom Power BI dashboards and digital tools for network monitoring and operational reporting</li>
+          <li>Produced structured performance reports from raw data to support technical and management decision-making</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Aug 2019 — Oct 2021</div>
+        <div class="tl-role">Project Management Associate</div>
+        <div class="tl-company">V.P. Engineering &amp; Logistics Ltd. · Tamil Nadu, India</div>
+        <ul class="tl-points">
+          <li>Increased process output by 23% through OMP-based demand planning that aligned inventory with inbound and replenishment flows</li>
+          <li>Reduced procurement costs and increased eco-friendly material usage by 15% through sustainability-aligned supplier negotiations</li>
+          <li>Achieved 100% safety compliance across heavy equipment operations through comprehensive technical audits</li>
+          <li>Boosted production output by 40% through cross-functional workflow redesign</li>
+          <li>Identified 12% cost savings on selected trade lanes via multimodal transportation feasibility study</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Feb 2018 — Jul 2019</div>
+        <div class="tl-role">Mechanical Design Engineer</div>
+        <div class="tl-company">GMR Industries &amp; Logistics Pvt. Ltd. · Tamil Nadu, India</div>
+        <ul class="tl-points">
+          <li>Achieved 90% revenue accuracy and 95% on-time delivery by optimising order flow and logistics handoff processes</li>
+          <li>Reduced energy consumption by 15% and improved warehouse airflow efficiency by 30% through HVAC engineering upgrades</li>
+          <li>Delivered 35% cost savings and 40% operational efficiency gain through ERP implementations across Oracle, SAP, and MS Dynamics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Recent Work</div>
+      <h2 class="section-title">Project<br>Highlights<span class="dot">.</span></h2>
+      <p class="section-desc">Selected consulting engagements with verified, measurable outcomes across supply chain, freight, and logistics operations.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="proj-card featured reveal">
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag dark">🌟 Featured</span>
+            <span class="proj-tag">Fresh Produce</span>
+            <span class="proj-tag">EU Export</span>
+            <span class="proj-tag">2024 — 2025</span>
+          </div>
+          <div class="proj-title">Supply Chain Optimisation — Paula's Fruits and Foods Exports</div>
+          <div class="proj-client">Freelance · Mexico City (Remote) · Fresh Produce &amp; Specialty Food Exports to EU · 2024 — 2025</div>
+          <p class="proj-desc">End-to-end SCM redesign across the Mexico→EU corridor. Audited harvest-to-handoff SKU flow, restructured freight routing across three corridors, and rolled out FIFO + shelf-life governance. Strengthened vendor and carrier accountability through structured review processes with key freight forwarders and customs brokers.</p>
+          <div class="proj-results">
+            <div class="result-item">OTD lifted from 79% → 96% (company record)</div>
+            <div class="result-item">25% reduction in excess inventory value</div>
+            <div class="result-item">18% drop in freight &amp; logistics spend</div>
+            <div class="result-item">10+ SOPs authored for customs &amp; cold-chain</div>
+          </div>
+          <div class="verified-pill" style="margin-top:1rem;">✓ Verified — Letter of Achievement · Ref: PFFE/LOA/SCM/2025-017 · March 2025</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-body">
+          <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">PuLP</span><span class="proj-tag">Optimisation</span></div>
+          <div class="proj-title">Python-Based Inventory Optimisation System</div>
+          <div class="proj-client">Warsaw University of Technology · 2023 — 2024</div>
+          <p class="proj-desc">Built a stochastic inventory optimiser using Python's PuLP linear programming library — modelling demand variance, lead-time uncertainty, and reorder constraints across multi-echelon networks.</p>
+          <div class="proj-results single">
+            <div class="result-item">80% improvement in budget utilisation</div>
+            <div class="result-item">23% process output gain through OMP planning</div>
+            <div class="result-item">Demand-driven reorder logic with safety-stock tuning</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal reveal-d1">
+        <div class="proj-body">
+          <div class="proj-tags"><span class="proj-tag">ERP</span><span class="proj-tag">Oracle</span><span class="proj-tag">SAP</span><span class="proj-tag">MS Dynamics</span></div>
+          <div class="proj-title">ERP Implementation — Oracle / SAP / MS Dynamics</div>
+          <div class="proj-client">GMR Industries &amp; Logistics Pvt. Ltd. · 2018 — 2019</div>
+          <p class="proj-desc">Led parallel ERP rollouts across three platforms covering procurement, warehousing, and finance reconciliation modules with cross-functional adoption training.</p>
+          <div class="proj-results single">
+            <div class="result-item">35% cost savings post-implementation</div>
+            <div class="result-item">40% operational efficiency improvement</div>
+            <div class="result-item">95% on-time delivery rate sustained</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-body">
+          <div class="proj-tags"><span class="proj-tag">OMP</span><span class="proj-tag">Demand Planning</span></div>
+          <div class="proj-title">Demand-Driven OMP Supply Chain Planning</div>
+          <div class="proj-client">V.P. Engineering &amp; Logistics Ltd. · India</div>
+          <p class="proj-desc">Identified and resolved critical supply chain bottlenecks through OMP-based demand planning. Aligned daily inbound flows and replenishment strategy with actual consumption patterns using data-driven demand modelling.</p>
+          <div class="proj-results single">
+            <div class="result-item">23% increase in process output</div>
+            <div class="result-item">Inventory fully aligned with real-time demand signals</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal reveal-d1">
+        <div class="proj-body">
+          <div class="proj-tags"><span class="proj-tag">Power BI</span><span class="proj-tag">Dashboards</span></div>
+          <div class="proj-title">Power BI Operations Dashboards</div>
+          <div class="proj-client">JNS Sp. z o.o. · Lodz, Poland</div>
+          <p class="proj-desc">Designed and deployed custom Power BI dashboards transforming raw infrastructure and operations data into structured decision-support tools for technical and management teams.</p>
+          <div class="proj-results single">
+            <div class="result-item">Network downtime reduced by 27%</div>
+            <div class="result-item">30% improvement in system performance visibility</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Academic Background</div>
+      <h2 class="section-title">Education<span class="dot">.</span></h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">MSc in Transportation Engineering &amp; Management</div>
+        <div class="edu-school">Warsaw University of Technology · Warsaw, Poland</div>
+        <div class="edu-date">Oct 2022 — Jul 2025</div>
+      </div>
+      <div class="edu-card reveal reveal-d1">
+        <div class="edu-icon">🏛</div>
+        <div class="edu-degree">BSc in Mechanical Engineering</div>
+        <div class="edu-school">Anna University of Technology · Chennai, India</div>
+        <div class="edu-date">Jul 2013 — Jun 2017</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Competencies</div>
+      <h2 class="section-title">Skills<span class="dot">.</span></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="reveal">
+        <div class="skill-cat">Key Technical Skills</div>
+        <div class="skill-bar"><div class="skill-row">Supply Chain &amp; Inventory Management<span>95%</span></div><div class="skill-track"><div class="skill-fill" style="width:95%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">Freight &amp; Multimodal Transport<span>90%</span></div><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">Demand Planning &amp; OMP<span>88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">SAP / Oracle / MS Dynamics ERP<span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">Power BI Dashboards<span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">Python &amp; Data Analytics<span>82%</span></div><div class="skill-track"><div class="skill-fill" style="width:82%"></div></div></div>
+        <div class="skill-bar"><div class="skill-row">Process Improvement &amp; Audit<span>88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="skill-cat">Career Highlights</div>
+        <div class="highlights-list">
+          <div class="hl-item">⚡ 23% process output increase via OMP demand planning</div>
+          <div class="hl-item">💡 80% budget utilisation boost — Python PuLP optimisation</div>
+          <div class="hl-item">🏭 40% production output boost — cross-functional workflow redesign</div>
+          <div class="hl-item">💰 35% cost savings via Oracle, SAP &amp; MS Dynamics ERP rollouts</div>
+          <div class="hl-item">🚛 96% OTD rate achieved — highest in client company history</div>
+          <div class="hl-item">🌍 100% safety compliance across heavy equipment operations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Let's Connect</div>
+      <h2 class="section-title">Get In<br>Touch<span class="dot">.</span></h2>
+      <p class="section-desc">Actively exploring supply chain, logistics, and transportation engineering roles across Germany, the Netherlands, Belgium, and the Nordics. Relocation-ready across Europe.</p>
+    </div>
+    <div class="contact-layout">
+      <div class="reveal">
+        <div class="contact-links">
+          <a href="mailto:abishekmanickam.official@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            abishekmanickam.official@gmail.com
+          </a>
+          <a href="tel:+48794203501" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            (+48) 794 203 501
+          </a>
+          <a href="https://linkedin.com/in/abishekmanickam" target="_blank" class="contact-link">
+            <div class="contact-link-icon">💼</div>
+            linkedin.com/in/abishekmanickam
+          </a>
+          <div class="contact-link" style="cursor:default;">
+            <div class="contact-link-icon">📍</div>
+            Warszawa, Poland · Open to Relocation Across Europe
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           FORMSPREE CONTACT FORM
+           HOW TO ACTIVATE:
+           1. Go to https://formspree.io
+           2. Sign up free with your email
+           3. Click "New Form" → name it "Portfolio Contact"
+           4. Copy your form ID (looks like: xyzabcde)
+           5. Replace YOUR_FORM_ID below with your actual ID
+           ════════════════════════════════════ -->
+      <form class="contact-form reveal reveal-d1" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Jane Smith" required/>
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="jane@company.com" required/>
+          </div>
+        </div>
+        <div class="field">
+          <label>Subject</label>
+          <input type="text" name="subject" placeholder="Job opportunity / Project inquiry"/>
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea name="message" placeholder="Tell me about the role or project you have in mind..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">
+          Send Message
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <div id="form-success">✓ Message sent! Abishek will reply within 24 hours.</div>
+        <div id="form-error">⚠ Something went wrong. Please email directly: abishekmanickam.official@gmail.com</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ABISHEK<span>.</span> MANICKAM</div>
+  <div class="footer-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a href="https://linkedin.com/in/abishekmanickam" target="_blank">LinkedIn</a>
+  </div>
+  <div class="footer-copy">© 2025 Abishek Manickam · Warsaw, Poland · Supply Chain &amp; Logistics Specialist</div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  /* ── SCROLL REVEAL ── */
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ── BACK TO TOP ── */
+  window.addEventListener('scroll',()=>{
+    document.getElementById('btt').classList.toggle('visible',scrollY>600);
+  });
+
+  /* ── MOBILE MENU ── */
+  function openMenu(){document.getElementById('mobileMenu').classList.add('open')}
+  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+
+  /* ══════════════════════════════════════════════════
+     FORMSPREE CONTACT FORM
+     Replace YOUR_FORM_ID with your Formspree form ID
+     Get it free at: https://formspree.io
+  ══════════════════════════════════════════════════ */
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const success = document.getElementById('form-success');
+    const error = document.getElementById('form-error');
+    success.style.display = 'none';
+    error.style.display = 'none';
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const FORM_ID = 'YOUR_FORM_ID'; // ← Replace with your Formspree ID
+
+    if(FORM_ID === 'YOUR_FORM_ID'){
+      // Demo mode — shows success without sending
+      await new Promise(r=>setTimeout(r,800));
+      success.style.display='block';
+      success.textContent='⚠ Demo mode: Add your Formspree ID to activate real email delivery.';
+      btn.textContent='Send Message';
+      btn.disabled=false;
+      this.reset();
+      return;
+    }
+
+    try{
+      const data = new FormData(this);
+      const res = await fetch(`https://formspree.io/f/${FORM_ID}`,{
+        method:'POST',body:data,headers:{Accept:'application/json'}
+      });
+      if(res.ok){
+        success.style.display='block';
+        this.reset();
+      } else {
+        error.style.display='block';
+      }
+    } catch(err){
+      error.style.display='block';
+    }
+    btn.textContent='Send Message';
+    btn.disabled=false;
+  });
+</script>
+</body>
+</html>
